@@ -2,20 +2,20 @@ require 'net/http'
 
 module Chuanglan
   class Request
-    def initialize(recipients, message)
+    def initialize(url, recipients, message)
+      @uri = URI(url)
       @recipients = Array(recipients)
       @message = message
     end
 
     def perform!
-      uri = URI(GATEWAY)
       timeout = Chuanglan.timeout
-      response = Net::HTTP.start(uri.host,
-                                  uri.port,
-                                  open_timeout: timeout,
-                                  read_timeout: timeout) do |http|
+      response = Net::HTTP.start(@uri.host,
+                                 @uri.port,
+                                 open_timeout: timeout,
+                                 read_timeout: timeout) do |http|
         post_data = URI.encode_www_form(payload)
-        http.request_post(uri.path, post_data)
+        http.request_post(@uri.path, post_data)
       end
 
       success_or_raise_exception(response)
