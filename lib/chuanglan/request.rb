@@ -8,13 +8,13 @@ module Chuanglan
       @message = message
     end
 
-    def perform!
+    def perform!(is_promote = false)
       timeout = Chuanglan.timeout
       response = Net::HTTP.start(@uri.host,
                                  @uri.port,
                                  open_timeout: timeout,
                                  read_timeout: timeout) do |http|
-        post_data = URI.encode_www_form(payload)
+        post_data = URI.encode_www_form(is_promote ? promote_payload,  payload)
         http.request_post(@uri.path, post_data)
       end
 
@@ -22,6 +22,16 @@ module Chuanglan
     end
 
     private
+
+    def promote_payload
+      {
+        account: Chuanglan.promote_username,
+        pswd: Chuanglan.promote_password,
+        mobile: @recipients.join(','),
+        msg: @message,
+        needstatus: 'true',
+      }
+    end
 
     def payload
       {

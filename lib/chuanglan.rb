@@ -7,11 +7,16 @@ module Chuanglan
   @timeout = 5
 
   class << self
-    attr_accessor :username, :password, :timeout
+    attr_accessor :username, :password, :timeout, :promote_username, :promote_password
 
     def send_to!(recipients, message)
       url = "#{GATEWAY}/msg/HttpBatchSendSM"
       Request.new(url, recipients, message).perform!
+    end
+    
+    def send_promote_to!(recipients, message)
+      url = "#{GATEWAY}/msg/HttpBatchSendSM"
+      Request.new(url, recipients, message).perform(true)!
     end
   end
 end

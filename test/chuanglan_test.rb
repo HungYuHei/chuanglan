@@ -4,12 +4,16 @@ class ChuanglanTest < Minitest::Test
   def setup
     ::Chuanglan.username = 'username'
     ::Chuanglan.password = 'password'
+    ::Chuanglan.promote_username = 'promote_username'
+    ::Chuanglan.promote_password = 'promote_password'
     @send_sms_gateway = 'http://222.73.117.158:80/msg/HttpBatchSendSM'
   end
 
   def test_configuration
     refute_nil ::Chuanglan.username
     refute_nil ::Chuanglan.password
+    refute_nil ::Chuanglan.promote_username
+    refute_nil ::Chuanglan.promote_password
     refute_nil ::Chuanglan.timeout
   end
 
