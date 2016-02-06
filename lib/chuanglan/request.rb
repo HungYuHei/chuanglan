@@ -14,7 +14,7 @@ module Chuanglan
                                  @uri.port,
                                  open_timeout: timeout,
                                  read_timeout: timeout) do |http|
-        post_data = URI.encode_www_form(is_promote ? promote_payload,  payload)
+        post_data = URI.encode_www_form(is_promote ? promote_payload : payload)
         http.request_post(@uri.path, post_data)
       end
 
