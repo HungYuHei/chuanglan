@@ -16,7 +16,7 @@ module Chuanglan
     
     def send_promote_to!(recipients, message)
       url = "#{GATEWAY}/msg/HttpBatchSendSM"
-      Request.new(url, recipients, message).perform(true)!
+      Request.new(url, recipients, message).perform!(true)
     end
   end
 end
