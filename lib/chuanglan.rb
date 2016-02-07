@@ -4,6 +4,7 @@ require 'chuanglan/request_exception'
 
 module Chuanglan
   GATEWAY = 'http://222.73.117.158:80'
+  PROMOTE_GATEWAY = 'http://222.73.117.169:80'
   @timeout = 5
 
   class << self
@@ -15,8 +16,8 @@ module Chuanglan
     end
     
     def send_promote_to!(recipients, message)
-      url = "#{GATEWAY}/msg/HttpBatchSendSM"
-      Request.new(url, recipients, message).perform!(true)
+      promote_url = "#{PROMOTE_GATEWAY}/msg/HttpBatchSendSM"
+      Request.new(promote_url, recipients, message).perform!(true)
     end
   end
 end
