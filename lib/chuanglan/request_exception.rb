@@ -1,6 +1,7 @@
 module Chuanglan
   class RequestException < StandardError
     ERROR_MESSAGES = {
+      '100' => 'Bad API Address',
       '101' => 'No such user',   # Not officially documented
       '102' => 'Wrong password',
       '103' => 'Push too hurry',
