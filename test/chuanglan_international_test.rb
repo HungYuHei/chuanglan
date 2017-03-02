@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ChuanglanInternetionalTest < Minitest::Test
+class ChuanglanInternationalTest < Minitest::Test
   def setup
     ::Chuanglan::International.username = 'int_username'
     ::Chuanglan::International.password = 'int_password'
