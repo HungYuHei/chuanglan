@@ -4,7 +4,7 @@ class ChuanglanTest < Minitest::Test
   def setup
     ::Chuanglan.username = 'username'
     ::Chuanglan.password = 'password'
-    @send_sms_gateway = 'http://222.73.117.158:80/msg/HttpBatchSendSM'
+    @send_sms_gateway = 'http://sms.253.com:443/msg/send'
   end
 
   def test_configuration
@@ -19,7 +19,7 @@ class ChuanglanTest < Minitest::Test
 
   def test_send_to_success
     stub_request(:post, @send_sms_gateway).
-      to_return(status: 200, body: "123456,0\nmessage_id")
+      to_return(status: 200, body: "20170302113947,0\nmessage_id")
 
     assert ::Chuanglan.send_to!('1234567890', 'hello')
   end

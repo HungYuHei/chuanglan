@@ -3,15 +3,34 @@ require 'chuanglan/request'
 require 'chuanglan/request_exception'
 
 module Chuanglan
-  GATEWAY = 'http://222.73.117.158:80'
+  GATEWAY = 'https://sms.253.com'
   @timeout = 5
 
   class << self
     attr_accessor :username, :password, :timeout
 
-    def send_to!(recipients, message)
-      url = "#{GATEWAY}/msg/HttpBatchSendSM"
-      Request.new(url, recipients, message).perform!
+    def send_to!(recipients, message, params = {})
+      params[:phone] = Array(recipients).join(',')
+      params[:msg] = message
+      params = base_params.merge(params)
+      rsp = Request.new("#{GATEWAY}/msg/send", params).perform
+      success_or_raise_exception(rsp)
+    end
+
+    private
+
+    def base_params
+      {
+        un: username,
+        pw: password,
+        rd: 1,
+      }
+    end
+
+    def success_or_raise_exception(response)
+      headers, msgid= response.body.split("\n")
+      timestamp, code = headers.split(',')
+      code == '0' || raise(RequestException.new(code))
     end
   end
 end
