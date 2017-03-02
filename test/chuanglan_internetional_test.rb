@@ -4,7 +4,7 @@ class ChuanglanInternetionalTest < Minitest::Test
   def setup
     ::Chuanglan::International.username = 'int_username'
     ::Chuanglan::International.password = 'int_password'
-    @sms_gateway = 'http://intapi.253.com:443/mt'
+    @sms_gateway = 'https://intapi.253.com/mt'
   end
 
   def test_configuration

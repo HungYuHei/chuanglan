@@ -4,8 +4,8 @@ class ChuanglanTest < Minitest::Test
   def setup
     ::Chuanglan.username = 'username'
     ::Chuanglan.password = 'password'
-    @send_sms_gateway = 'http://sms.253.com:443/msg/send'
-    @balance_gateway = 'http://sms.253.com:443/msg/balance'
+    @send_sms_gateway = 'https://sms.253.com/msg/send'
+    @balance_gateway = 'https://sms.253.com/msg/balance'
   end
 
   def test_configuration

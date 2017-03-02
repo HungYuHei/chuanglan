@@ -10,7 +10,8 @@ module Chuanglan
 
     def perform
       timeout = Chuanglan.timeout
-      Net::HTTP.start(@uri.host, @uri.port, open_timeout: timeout, read_timeout: timeout) do |http|
+      is_https = @uri.scheme == 'https'
+      Net::HTTP.start(@uri.host, @uri.port, open_timeout: timeout, read_timeout: timeout, use_ssl: is_https) do |http|
         post_data = URI.encode_www_form(@params)
         http.request_post(@uri.path, post_data)
       end
