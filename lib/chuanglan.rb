@@ -18,6 +18,11 @@ module Chuanglan
       success_or_raise_exception(rsp)
     end
 
+    def balance
+      rsp = Request.new("#{GATEWAY}/msg/balance", un: username, pw: password).perform
+      success_or_raise_exception(rsp).to_i
+    end
+
     private
 
     def base_params
@@ -29,9 +34,9 @@ module Chuanglan
     end
 
     def success_or_raise_exception(response)
-      headers, msgid= response.body.split("\n")
+      headers, data   = response.body.split("\n")
       timestamp, code = headers.split(',')
-      code == '0' || raise(RequestException.new(code))
+      code == '0' ? data : raise(RequestException.new(code))
     end
   end
 end

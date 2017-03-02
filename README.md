@@ -36,6 +36,12 @@ Chuanglan.send_to!(['10086', '10010'], '信号好差啊')
 Chuanglan.send_to!('10086', '流量唔够用啊', un: 'un', pw: 'pw', rd: 0, ex: 'ex')
 ```
 
+### Check balance
+
+```ruby
+Chuanglan.balance # => 100
+```
+
 ### Send International SMS
 
 ```ruby
