@@ -1,4 +1,5 @@
 require 'chuanglan/version'
+require 'chuanglan/international'
 require 'chuanglan/request'
 require 'chuanglan/request_exception'
 
@@ -10,9 +11,9 @@ module Chuanglan
     attr_accessor :username, :password, :timeout
 
     def send_to!(recipients, message, params = {})
+      params = base_params.merge(params)
       params[:phone] = Array(recipients).join(',')
       params[:msg] = message
-      params = base_params.merge(params)
       rsp = Request.new("#{GATEWAY}/msg/send", params).perform
       success_or_raise_exception(rsp)
     end

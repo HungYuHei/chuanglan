@@ -23,9 +23,12 @@ Or install it yourself as:
 ```ruby
 Chuanglan.username = 'username'
 Chuanglan.password = 'password'
+
+Chuanglan::International.username = 'international_username'
+Chuanglan::International.password = 'international_password'
 ```
 
-### Send sms
+### Send SMS
 
 ```ruby
 Chuanglan.send_to!('10086', '流量唔够用啊')
@@ -33,6 +36,12 @@ Chuanglan.send_to!(['10086', '10010'], '信号好差啊')
 Chuanglan.send_to!('10086', '流量唔够用啊', un: 'un', pw: 'pw', rd: 0, ex: 'ex')
 ```
 
+### Send International SMS
+
+```ruby
+Chuanglan::International.send_to!('8613612345678', '流量唔够用啊')
+Chuanglan::International.send_to!('8613612345678', '流量唔够用啊', un: 'un', pw: 'pw', dc: 15, rf: 1, tf: 3)
+```
 
 ## Development
 
