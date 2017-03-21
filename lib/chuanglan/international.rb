@@ -3,12 +3,12 @@ module Chuanglan
     GATEWAY = 'https://intapi.253.com'
 
     class << self
-      attr_accessor :username, :password, :timeout
+      attr_accessor :username, :password, :timeout, :signature
 
       def send_to!(recipients, message, params = {})
         params = base_params.merge(params)
         params[:da] = Array(recipients).join(',')
-        params[:sm] = message
+        params[:sm] = "#{params.fetch(:signature, signature)}#{message}"
         rsp = Request.new("#{GATEWAY}/mt", params).perform
         success_or_raise_exception(rsp)
       end

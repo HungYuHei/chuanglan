@@ -4,6 +4,7 @@ class ChuanglanTest < Minitest::Test
   def setup
     ::Chuanglan.username = 'username'
     ::Chuanglan.password = 'password'
+    ::Chuanglan.signature = 'signature'
     @send_sms_gateway = 'https://sms.253.com/msg/send'
     @balance_gateway = 'https://sms.253.com/msg/balance'
   end
@@ -12,6 +13,7 @@ class ChuanglanTest < Minitest::Test
     refute_nil ::Chuanglan.username
     refute_nil ::Chuanglan.password
     refute_nil ::Chuanglan.timeout
+    refute_nil ::Chuanglan.signature
   end
 
   def test_that_it_has_a_version_number

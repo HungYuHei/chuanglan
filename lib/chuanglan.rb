@@ -8,12 +8,12 @@ module Chuanglan
   @timeout = 5
 
   class << self
-    attr_accessor :username, :password, :timeout
+    attr_accessor :username, :password, :timeout, :signature
 
     def send_to!(recipients, message, params = {})
       params = base_params.merge(params)
       params[:phone] = Array(recipients).join(',')
-      params[:msg] = message
+      params[:msg] = "#{params.fetch(:signature, signature)}#{message}"
       rsp = Request.new("#{GATEWAY}/msg/send", params).perform
       success_or_raise_exception(rsp)
     end
