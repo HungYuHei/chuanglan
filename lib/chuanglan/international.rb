@@ -8,7 +8,7 @@ module Chuanglan
       def send_to!(recipients, message, params = {})
         params = base_params.merge(params)
         params[:da] = Array(recipients).join(',')
-        params[:sm] = "#{params.fetch(:signature, signature)}#{message}"
+        params[:sm] = "#{params.delete(:signature) || signature}#{message}"
         rsp = Request.new("#{GATEWAY}/mt", params).perform
         success_or_raise_exception(rsp)
       end
